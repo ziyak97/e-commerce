@@ -6,12 +6,15 @@
   align-items: center;
   position: relative;
 
-  .image {
+  .collection-item-image {
     width: 100%;
     height: 95%;
-    background-size: cover;
-    background-position: center;
+  }
+
+  .image {
     margin-bottom: 5px;
+    width: inherit;
+    height: inherit;
   }
 
   .custom-button {
@@ -24,7 +27,7 @@
 
   &:hover {
     .image {
-      opacity: 0.8;
+      border: 1px solid black;
     }
 
     .custom-button {
@@ -49,5 +52,22 @@
     .price {
       width: 10%;
     }
+  }
+
+  // FOR CAROUSEL LIBRARY
+  .collection-item-carousel {
+    width: 100% !important;
+    height: 100% !important;
+    margin-bottom: 5px;
+  }
+
+  .slider-list{
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .slider-slide{
+    width: 100% !important;
+    height: 100% !important;
   }
 }
