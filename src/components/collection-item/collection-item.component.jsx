@@ -43,28 +43,3 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(null, mapDispatchToProps)(CollectionItem)
-
-const smallest = (arr) => {
-    const smallest = Math.min(arr[0], arr[1])
-    const largest = Math.max(arr[0], arr[1])
-
-    let div = largest
-
-    while(true) {
-        let isSmallest = true
-        for(let i = smallest; i <= largest; i++) {
-            if(div % i !== 0) {
-                isSmallest = false
-                break
-            }
-        }
-
-        if(isSmallest) {
-            return div
-        } else {
-            div++
-        }
-    }
-}
-
-console.log(smallest([1,5]))

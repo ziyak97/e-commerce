@@ -59,14 +59,23 @@
     width: 100% !important;
     height: 100% !important;
     margin-bottom: 5px;
+
+    button {
+      background-color: black !important;
+      transition: all 0.2s;
+
+      &:hover:not(:disabled) {
+        font-size: 15px;
+      }
+    }
   }
 
-  .slider-list{
+  .slider-list {
     width: 100% !important;
     height: 100% !important;
   }
 
-  .slider-slide{
+  .slider-slide {
     width: 100% !important;
     height: 100% !important;
   }

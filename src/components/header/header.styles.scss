@@ -19,8 +19,18 @@
       justify-content: flex-end;
   
       .option {
+        position: relative;
         padding: 10px 15px;
         cursor: pointer;
+        transition: all .2s;
+
+        &:hover {
+          background-color: rgb(211, 211, 211);
+        }
+      }
+
+      .option-active {
+        background-color: rgb(211, 211, 211);
       }
     }
   }
