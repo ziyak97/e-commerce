@@ -21,40 +21,18 @@ const Header = ({ currentUser, hidden, toggleCartHidden }) => {
   const [shopActive, setShopActive] = useState(false)
   const [aboutActive, setAboutActive] = useState(false)
 
-  const shopClickHandler = () => {
-    setShopActive(!shopActive)
-    setAboutActive(false)
-    console.log(hidden)
-    if(!hidden) {
-      toggleCartHidden()
-    }
-  }
-
-  const aboutClickHandler = () => {
-    setAboutActive(!aboutActive)
-    setShopActive(false)
-    if(!hidden) {
-      toggleCartHidden()
-    }
-  }
-
-  const cartClickHandler = () => {
-    setShopActive(false)
-    setAboutActive(false)
-  }
-
   return (
     <div className='header'>
       <Link className='logo-container' to='/'>
         <Logo className='logo' />
       </Link>
       <div className='options'>
-        <div className={shopActive ? 'option-active option' : 'option'} onClick={shopClickHandler}>
+        <div className={shopActive ? 'option-active option' : 'option'} onMouseEnter={() => setShopActive(true)} onMouseLeave={() => setShopActive(false)}>
           SHOP
           {shopActive ? <ShopDropdown /> : null}
 
         </div>
-        <div className={aboutActive ? 'option-active option' : 'option'} onClick={aboutClickHandler}>
+        <div className={aboutActive ? 'option-active option' : 'option'} onMouseEnter={() => setAboutActive(true)}  onMouseLeave={() => setAboutActive(false)}>
           ABOUT US
           {aboutActive ? <AboutDropdown /> : null}
         </div>
@@ -67,7 +45,7 @@ const Header = ({ currentUser, hidden, toggleCartHidden }) => {
               SIGN IN
             </Link>
           )}
-        <div onClick={cartClickHandler}>
+        <div>
           <CartIcon />
         </div>
         {hidden ? null : <CartDropdown />}
