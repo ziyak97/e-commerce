@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { withRouter } from 'react-router-dom'
+
 import FormInput from '../form-input/form-input.component'
 import CustomButton from '../custom-button/custom-button.component'
 
@@ -31,21 +33,19 @@ class SignUp extends React.Component {
         try {
             const { user } = await auth.createUserWithEmailAndPassword(email, password)
 
+            await user.sendEmailVerification()
+
             await createUserProfileDocument(user, { displayName })
 
-            this.setState({
-                displayName: '',
-                email: '',
-                password: '',
-                confirmPassword: ''
-            })
+            this.props.history.push(`${this.props.location.pathname}/verify`)
         } catch (error) {
+            alert(error.message)
             console.error(error)
         }
     }
 
     handleChange = (event) => {
-        const { name, value } = event.targert
+        const { name, value } = event.target
         this.setState({
             [name]: value
         })
@@ -101,4 +101,4 @@ class SignUp extends React.Component {
     }
 }
 
-export default SignUp
+export default withRouter(SignUp)

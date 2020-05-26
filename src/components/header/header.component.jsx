@@ -21,18 +21,32 @@ const Header = ({ currentUser, hidden, toggleCartHidden }) => {
   const [shopActive, setShopActive] = useState(false)
   const [aboutActive, setAboutActive] = useState(false)
 
+  const handleShopMouseEnter = () => {
+    if (!hidden) {
+      toggleCartHidden()
+    }
+    setShopActive(true)
+  }
+
+  const handleAboutMouseEnter = () => {
+    if (!hidden) {
+      toggleCartHidden()
+    }
+    setAboutActive(true)
+  }
+
   return (
     <div className='header'>
       <Link className='logo-container' to='/'>
         <Logo className='logo' />
       </Link>
       <div className='options'>
-        <div className={shopActive ? 'option-active option' : 'option'} onMouseEnter={() => setShopActive(true)} onMouseLeave={() => setShopActive(false)}>
+        <div className={shopActive ? 'option-active option' : 'option'} onMouseEnter={handleShopMouseEnter} onMouseLeave={() => setShopActive(false)}>
           SHOP
           {shopActive ? <ShopDropdown /> : null}
 
         </div>
-        <div className={aboutActive ? 'option-active option' : 'option'} onMouseEnter={() => setAboutActive(true)}  onMouseLeave={() => setAboutActive(false)}>
+        <div className={aboutActive ? 'option-active option' : 'option'} onMouseEnter={handleAboutMouseEnter} onMouseLeave={() => setAboutActive(false)}>
           ABOUT US
           {aboutActive ? <AboutDropdown /> : null}
         </div>

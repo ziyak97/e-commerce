@@ -1,11 +1,14 @@
 .cart-icon {
     width: 45px;
     height: 45px;
-    position: relative;
+    position: fixed;
+    top: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    border: 1px solid;
+    border-radius: 50%;
   
     .shopping-icon {
       width: 24px;

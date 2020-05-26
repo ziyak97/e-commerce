@@ -59,7 +59,7 @@
     width: 100% !important;
     height: 100% !important;
     margin-bottom: 5px;
-
+    
     button {
       background-color: black !important;
       transition: all 0.2s;
@@ -78,5 +78,10 @@
   .slider-slide {
     width: 100% !important;
     height: 100% !important;
+    cursor: default !important;
+  }
+
+  .slider-control-bottomcenter {
+    display: none !important;
   }
 }

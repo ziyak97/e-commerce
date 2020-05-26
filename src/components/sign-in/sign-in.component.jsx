@@ -1,5 +1,8 @@
 import React from 'react'
 
+import { Link, withRouter } from 'react-router-dom'
+
+
 import FormInput from '../form-input/form-input.component'
 import CustomButton from '../custom-button/custom-button.component'
 import { auth, signInWithGoogle } from '../../firebase/firebase.utils'
@@ -17,10 +20,12 @@ class SignIn extends React.Component {
 
     handleSubmit = async event => {
         event.preventDefault()
-        const { email, password } = event.target
+        const email = this.state.email
+        const password = this.state.password
         try {
             await auth.signInWithEmailAndPassword(email, password)
             this.setState({ email: '', password: '' })
+
         } catch (error) {
             console.error(error)
         }
@@ -56,6 +61,7 @@ class SignIn extends React.Component {
                         label="password"
                         required
                     />
+                    <Link to={`${this.props.location.pathname}/forgot-password`} className='signin__forgot-password'>Forgot Password?</Link>
                     <div className='buttons'>
                         <CustomButton type="submit">Sign In</CustomButton>
                         <CustomButton onClick={signInWithGoogle} isGoogleSignIn>Sign In With Google</CustomButton>
@@ -66,4 +72,4 @@ class SignIn extends React.Component {
     }
 }
 
-export default SignIn
+export default withRouter(SignIn)

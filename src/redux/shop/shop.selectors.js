@@ -18,3 +18,10 @@ export const selectShopCollection = (collectionUrlParam) => (
         collections => collections[collectionUrlParam]
     )
 )
+
+export const selectShopItemToDisplay = (collectionUrlParam1, collectionUrlParam2) => (
+    createSelector(
+        [selectShopCollections],
+        collections => collections[collectionUrlParam1].items.filter(item => item.name === collectionUrlParam2)[0]
+    )
+)

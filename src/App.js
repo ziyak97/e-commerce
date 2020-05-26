@@ -13,6 +13,8 @@ import Header from './components/header/header.component'
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 import { setCurrentUser } from './redux/user/user.actions'
 import { selectCurrentUser } from './redux/user/user.selectors'
+import VerifyEmailPage from './pages/verify-email-page/verify-email-page.comonent'
+import ForgotPasswordPage from './pages/forgot-password-page/forgot-password-page.component'
 
 class App extends React.Component {
   unsubscribeFromAuth = null
@@ -31,6 +33,8 @@ class App extends React.Component {
           })
         })
       }
+
+      // console.log(userAuth)
 
       setCurrentUser(userAuth)
     })
@@ -57,6 +61,8 @@ class App extends React.Component {
                 <SignInAndSignUpPage />
               )
           } />
+          <Route path='/signin/verify' component={VerifyEmailPage} />
+          <Route path='/signin/forgot-password' component={ForgotPasswordPage} />
         </Switch>
       </div>
     )

@@ -11,4 +11,16 @@
         display: flex;
         justify-content: space-between;
     }
+
+    .signin__forgot-password {
+        position: relative;
+        display: inline-block;
+        top: - 25px;
+        transition: all .2s;
+
+        &:hover {
+            color: red;
+            transform: scale(1.05);
+        }
+    }
 }

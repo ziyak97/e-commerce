@@ -13,7 +13,7 @@ const ShopDropdown = ({ shopDirectory }) => {
 
     return (
         <div className="contact-dropdown">
-            <Link className="contact-dropdown__item" to='/shop'>ALL ITEMS</Link>
+            <Link className="contact-dropdown__item" to='/shop'>OUR FAVORITES</Link>
             {shopTitles.map(shopTitle => (
                 <Link key={shopTitle} className="contact-dropdown__item" to={`/shop/${shopTitle}`}>{shopTitle.toUpperCase()}</Link>
             ))}

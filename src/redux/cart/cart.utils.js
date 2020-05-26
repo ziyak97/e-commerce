@@ -1,9 +1,9 @@
 export const addItemsToCart = (cartItems, cartItemToAdd) => {
-    const existingCartItem = cartItems.find(cartItem => cartItem.id === cartItemToAdd.id)
+    const existingCartItem = cartItems.find(cartItem => cartItem.sizeId === cartItemToAdd.sizeId)
 
     if (existingCartItem) {
         return cartItems.map(cartItem =>
-            cartItem.id === existingCartItem.id
+            cartItem.sizeId === existingCartItem.sizeId
                 ? { ...cartItem, quantity: cartItem.quantity + 1 }
                 : cartItem
         )
@@ -13,12 +13,12 @@ export const addItemsToCart = (cartItems, cartItemToAdd) => {
 }
 
 export const removeItemsFromCart = (cartItems, cartItemToRemove) => {
-    const existingCartItem = cartItems.find(cartItem => cartItem.id === cartItemToRemove.id)
+    const existingCartItem = cartItems.find(cartItem => cartItem.sizeId === cartItemToRemove.sizeId)
     if (existingCartItem.quantity === 1) {
-        return cartItems.filter(cartItem => cartItem.id !== existingCartItem.id)
+        return cartItems.filter(cartItem => cartItem.sizeId !== existingCartItem.sizeId)
     }
     return cartItems.map(cartItem => {
-        return cartItem.id === existingCartItem.id
+        return cartItem.sizeId === existingCartItem.sizeId
             ? { ...cartItem, quantity: cartItem.quantity - 1 }
             : cartItem
     })

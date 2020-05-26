@@ -1,0 +1,21 @@
+.size-buttons {
+    font-size: 1rem;
+    padding: 1rem;
+    border: 1px solid #bfc0c6;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+    min-width: 50px;
+    outline: none;
+    font-weight: bold;
+    margin: 0 .3rem;
+
+    &:hover {
+        border: 1px solid #ff3f6c;
+    }
+}
+
+.active {
+    border: 1px solid #ff3f6c;
+    color: #ff3f6c;
+}
