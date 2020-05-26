@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route, Redirect, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
@@ -15,6 +15,7 @@ import { setCurrentUser } from './redux/user/user.actions'
 import { selectCurrentUser } from './redux/user/user.selectors'
 import VerifyEmailPage from './pages/verify-email-page/verify-email-page.comonent'
 import ForgotPasswordPage from './pages/forgot-password-page/forgot-password-page.component'
+import AdminPage from './pages/admin-page/admin-page.component'
 
 class App extends React.Component {
   unsubscribeFromAuth = null
@@ -33,8 +34,6 @@ class App extends React.Component {
           })
         })
       }
-
-      // console.log(userAuth)
 
       setCurrentUser(userAuth)
     })
@@ -61,9 +60,23 @@ class App extends React.Component {
                 <SignInAndSignUpPage />
               )
           } />
+            <Route exact path='/secret-admin-page' render={() =>
+            this.props.currentUser && this.props.currentUser.isAdmin ?
+              (
+                <AdminPage />
+                
+              ) :
+              (
+               <Redirect to='/' />
+              )
+          } />
           <Route path='/signin/verify' component={VerifyEmailPage} />
           <Route path='/signin/forgot-password' component={ForgotPasswordPage} />
         </Switch>
+        {
+          this.props.currentUser && this.props.currentUser.isAdmin &&
+          <Link to='/secret-admin-page'>Admin Page</Link>
+        }
       </div>
     )
   }

@@ -13,10 +13,8 @@ import './collection-item.styles.scss'
 const CollectionItem = ({ item, addItem, history, match, title }) => {
     const { name, price, imageUrl } = item
     const [carouselControls, setCarouselControls] = useState(true)
-    console.log(carouselControls)
     const handleClick = () => {
         if (!match.params.collectionId) {
-            console.log(title)
             history.push(`${match.url}/${title.toLowerCase()}/${name}`)
         } else {
             history.push(`${match.url}/${name}`)
