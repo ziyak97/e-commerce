@@ -4,7 +4,7 @@ import firebase from '../../firebase/firebase.utils'
 const AdminCollectionItems = ({ collection }) => {
     const [form, setForm] = useState({})
     const [files, setFiles] = useState([])
-    const regexSizes = /^([a-z]+)(,\s*[a-z]+)*$/i  // validate form is seperated by comma.
+    const regexSizes = /^([a-z]+)(,\s*[a-z]+)*$/i  // validate sizes are seperated by comma.
 
     const validateFormAndTransformData = () => {
         if (!(form.name, form.id, form.description, form.sizes, form.price)) {
@@ -42,8 +42,13 @@ const AdminCollectionItems = ({ collection }) => {
         const storageRef = firebase.storage().ref();
         files.forEach(file => {
             const imageRef = storageRef.child(`${collection}/${form.name}/${file.name}`);
-            imageRef.put(file).then(function (snapshot) {
-                console.log(`Uploaded ${file.name}`);
+            imageRef.put(file).then(async snapshot => {
+                try {
+                    const downloadUrl = await snapshot.ref.getDownloadURL()
+                    console.log(downloadUrl)
+                } catch (e) {
+                    console.error(e.message)
+                }
             })
         })
 

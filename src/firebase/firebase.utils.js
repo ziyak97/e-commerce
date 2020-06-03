@@ -65,7 +65,7 @@ export const addDocument = async (title) => {
 export const addItemsToDocument = async (title, item) => {
     const collectionRef = await firestore.collection('collections').get()
     let docId = ''
-    collectionRef.docs.map(doc => {
+    collectionRef.docs.forEach(doc => {
         if(doc.data().title.toLowerCase() === title) {
             docId = doc.id
         }
