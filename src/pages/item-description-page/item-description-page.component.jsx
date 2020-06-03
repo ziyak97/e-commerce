@@ -9,6 +9,8 @@ import { addItem } from '../../redux/cart/cart.actions'
 import CustomButton from '../../components/custom-button/custom-button.component'
 import SizeButtons from '../../components/size-buttons/size-buttons.component'
 
+import './item-description-page.styles.scss'
+
 const ItemDescriptionPage = ({ item, addItem, history }) => {
 
     const inputEl = useRef(null)
@@ -27,19 +29,31 @@ const ItemDescriptionPage = ({ item, addItem, history }) => {
     }
 
     return (
-        <div>
-            {item.name}
-            <img src={`${item.imageUrl[0]}`} alt="" />
-            {errorMessage &&
-                <div>Please select a size!</div>}
-            {sizeSelected ?
-                <CustomButton onClick={() => addItem(item)}>ADD TO CART</CustomButton> :
-                <CustomButton onClick={() => setErrorMessage(true)}>ADD TO CART</CustomButton>
-            }
+        <div className='item-description-page'>
+            <div className='item-description-page__image-box'>
+                <div className='item-description-page__go-back' onClick={() => history.goBack()}>&#8592; GO BACK</div>
+                <img className='item-description-page__image' src={`${item.imageUrl[0]}`} alt={item.name} />
+            </div>
+            <div className='item-description-page__page-content'>
+                <h2>{item.name}</h2>
 
-            <div onClick={() => history.goBack()}>GO BACK</div>
-            <div ref={inputEl} onClick={handleClick}>
-                <SizeButtons sizes={item.sizes} />
+                <div className='item-description-page__description'>{item.description}</div>
+
+                <div className='item-description-page__sizes-container'>
+                    <div ref={inputEl} onClick={handleClick}>
+                        <SizeButtons sizes={item.sizes} />
+                    </div>
+
+                    {errorMessage &&
+                        <div className='item-description-page__select-size-message'>Please select a size!</div>
+                    }
+                </div>
+
+                {sizeSelected ?
+                    <CustomButton onClick={() => addItem(item)}>ADD TO CART</CustomButton> :
+                    <CustomButton onClick={() => setErrorMessage(true)}>ADD TO CART</CustomButton>
+                }
+
             </div>
         </div>
     )

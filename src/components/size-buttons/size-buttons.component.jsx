@@ -12,7 +12,7 @@ const SizeButtons = ({ sizes }) => {
     return (
         <div>
             {sizes.map(size => (
-                <button className='size-buttons' key={size} onClick={handleClick}>{size}</button>
+                <button className='size-buttons' key={size} onClick={handleClick}>{size.toUpperCase()}</button>
             ))}
         </div>
     )

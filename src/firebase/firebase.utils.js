@@ -1,5 +1,6 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import 'firebase/storage'
 import 'firebase/auth'
 
 const config = {
@@ -32,6 +33,63 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         }
     }
     return userRef
+}
+
+export const addCollectionsAndDocuments = async (collectionKey, objectsToAdd) => {
+    const collectionRef = firestore.collection(collectionKey)
+    const batch = firestore.batch()
+
+    objectsToAdd.forEach(obj => {
+        const newDocRef = collectionRef.doc()
+        batch.set(newDocRef, obj)
+    })
+    return await batch.commit()
+}
+
+export const addDocument = async (title) => {
+    const collectionRef = firestore.collection('collections')
+    const newDocRef = collectionRef.doc()
+    const snapshot = await newDocRef.get()
+    if(!snapshot.exists) {
+        try {
+            await newDocRef.set({
+                title,
+                items: []
+            })
+        } catch (e) {
+            console.error('Error creating document.', e.message)
+        }
+    }
+}
+
+export const addItemsToDocument = async (title, item) => {
+    const collectionRef = await firestore.collection('collections').get()
+    let docId = ''
+    collectionRef.docs.map(doc => {
+        if(doc.data().title.toLowerCase() === title) {
+            docId = doc.id
+        }
+    })
+    if(!docId) return
+    const docRef = firestore.doc(`collections/${docId}`)
+    const snapshot = await docRef.get()
+    console.log(snapshot)
+}
+
+export const collectionsSnapshotToMap = collections => {
+    const transformedCollections = collections.map(doc => {
+        const { title, items } = doc.data()
+        return {
+            routeName: encodeURI(title.toLowerCase()),
+            id: doc.id,
+            title,
+            items
+        }
+    })
+    return transformedCollections.reduce((acc, collection) => {
+        acc[collection.title.toLowerCase()] = collection
+        return acc
+    }, {})
 }
 
 firebase.initializeApp(config)
