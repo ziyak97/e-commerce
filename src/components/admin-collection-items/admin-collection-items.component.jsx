@@ -40,18 +40,17 @@ const AdminCollectionItems = ({ collection }) => {
     const handleSubmit = () => {
         validateFormAndTransformData()
         const storageRef = firebase.storage().ref();
-        files.forEach(file => {
-            const imageRef = storageRef.child(`${collection}/${form.name}/${file.name}`);
-            imageRef.put(file).then(async snapshot => {
-                try {
-                    const downloadUrl = await snapshot.ref.getDownloadURL()
-                    console.log(downloadUrl)
-                } catch (e) {
-                    console.error(e.message)
-                }
-            })
-        })
+        files.forEach(async file => {
+            const imageRef = storageRef.child(`${collection}/${form.name}/${file.name}`)
 
+            try {
+                const snapshot = await imageRef.put(file)
+                const downloadUrl = await snapshot.ref.getDownloadURL()
+                console.log(downloadUrl)
+            } catch (e) {
+                console.error(e.message)
+            }
+        })
     }
     return (
         <div>

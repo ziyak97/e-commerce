@@ -14,9 +14,8 @@ const AdminPage = ({ collections }) => {
     const collectionNames = Object.keys(collections)
 
     const handleSubmit = () => {
-        // addDocument(collection)
+        addDocument(collection)
         setCollection('')
-        addItemsToDocument('hats')
     }
     return (
         <div>
@@ -26,11 +25,8 @@ const AdminPage = ({ collections }) => {
                     <AdminCollectionItems collection={collection} />
                 </div>
             ))}
-    
                 <input type="text" value={collection} onChange={e => setCollection(e.target.value)} placeholder='Add Collection' />
-                <button onClick={handleSubmit} type='submit'>Add Collection</button>
-          
-
+                <button onClick={handleSubmit}>Add Collection</button>
         </div>
     )
 }
